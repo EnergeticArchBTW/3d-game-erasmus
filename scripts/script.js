@@ -59,9 +59,18 @@ const world = document.getElementById(
     "world"
 );
 
+/*let isJump = 0;
 function jump() {
+    if(isJump == 0) {
+        isJump = 1;
 
-}
+        for(let i = 0; i<10; ++i) {
+
+        }
+
+        isJump = 0;
+    }
+}*/
 
 function update() {
     //count movement
