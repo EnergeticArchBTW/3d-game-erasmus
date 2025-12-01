@@ -52,15 +52,25 @@ document.addEventListener("keyup", (event) => {
 })
 
 var pawn = new player(0,0,0,0,0);
+var world = document.getElementById(
+    "world"
+);
 
 function update() {
     //count movement
     dx = PressRight - PressLeft;
-    dz = PressForward - PressBack;
+    dz = PressBack - PressForward;
     dy = PressUp;
 
     //add movement to the coordinates
     pawn.x = pawn.x + dx;
     pawn.y = pawn.y + dy;
     pawn.z = pawn.z + dz;
+
+    //change coordinates of the world
+    world.style.transform = "translate3d(" 
+    + (-pawn.x) + "px," + (-pawn.y) + "px," 
+    + (-pawn.z) + "px)";
 }
+
+TimerGame = setInterval(update, 10);
