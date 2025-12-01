@@ -11,10 +11,7 @@
     /* get from #container */
     width: inherit;
     height: inherit;
-    background-color: #C0FFFF;
-    /* X, Y, Z */
-    transform: translate3d(200px,100px,20px)
-    rotateX(30deg);
+    /* background-color: #C0FFFF; */
     transform-style:preserve-3d;
 }
 
