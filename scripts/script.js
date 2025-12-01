@@ -15,16 +15,21 @@ let PressUp = 0;
 
 //if the key is pressed
 document.addEventListener("keydown", (event) => {
-    if (event.key == "w") {
+    if (event.key == "w" ||
+        event.key == "ArrowUp"
+    ) {
         PressForward = 1;
     }
-    if(event.key == "s") {
+    if(event.key == "s" ||
+        event.key == "ArrowDown") {
         PressBack = 1;
     }
-    if (event.key == "d") {
+    if (event.key == "d" ||
+        event.key == "ArrowRight") {
         PressRight = 1;
     }
-    if (event.key == "a") {
+    if (event.key == "a" ||
+        event.key == "ArrowLeft") {
         PressLeft = 1;
     }
     if(event.key == 32) {
@@ -37,16 +42,20 @@ document.addEventListener("keydown", (event) => {
 
 //if the key is released
 document.addEventListener("keyup", (event) => {
-    if (event.key == "w") {
+    if (event.key == "w" ||
+        event.key == "ArrowUp") {
         PressForward = 0;
     }
-    if(event.key == "s") {
+    if(event.key == "s" ||
+        event.key == "ArrowDown") {
         PressBack = 0;
     }
-    if (event.key == "d") {
+    if (event.key == "d" ||
+        event.key == "ArrowRight") {
         PressRight = 0;
     }
-    if (event.key == "a") {
+    if (event.key == "a" ||
+        event.key == "ArrowLeft") {
         PressLeft = 0;
     }
     if(event.key == 32) {
@@ -87,6 +96,9 @@ function update() {
     world.style.transform = "translate3d(" 
     + (-pawn.x) + "px," + (-pawn.y) + "px," 
     + (-pawn.z) + "px)";
+
+    //change coordinates of the square
+    // it will be something here...
 
     requestAnimationFrame(update);
 }
