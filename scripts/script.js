@@ -7,11 +7,11 @@ function player(x,y,z,rx,ry) {
 }
 
 //variables for movement
-var PressLeft = 0;
-var PressRight = 0;
-var PressForward = 0;
-var PressBack = 0;
-var PressUp = 0;
+let PressLeft = 0;
+let PressRight = 0;
+let PressForward = 0;
+let PressBack = 0;
+let PressUp = 0;
 
 //if the key is pressed
 document.addEventListener("keydown", (event) => {
@@ -29,6 +29,9 @@ document.addEventListener("keydown", (event) => {
     }
     if(event.key == 32) {
         PressUp = 1;
+    }
+    if(event.code === 'Space') {
+        console.log("siema");
     }
 })
 
@@ -51,10 +54,14 @@ document.addEventListener("keyup", (event) => {
     }
 })
 
-var pawn = new player(0,0,0,0,0);
-var world = document.getElementById(
+const pawn = new player(0,0,0,0,0);
+const world = document.getElementById(
     "world"
 );
+
+function jump() {
+
+}
 
 function update() {
     //count movement
@@ -71,6 +78,8 @@ function update() {
     world.style.transform = "translate3d(" 
     + (-pawn.x) + "px," + (-pawn.y) + "px," 
     + (-pawn.z) + "px)";
+
+    requestAnimationFrame(update);
 }
 
-TimerGame = setInterval(update, 10);
+update();
