@@ -13,6 +13,8 @@ let PressForward = 0;
 let PressBack = 0;
 let PressUp = 0;
 let PressSpace = 0;
+let MouseX = 0;
+let MouseY = 0;
 
 //if the key is pressed
 document.addEventListener("keydown", (event) => {
@@ -67,6 +69,12 @@ document.addEventListener("keyup", (event) => {
     }
 })
 
+//mouse movement listener
+document.addEventListener("mousemove", (event) => {
+    MouseX = event.movementX;
+    MouseY = event.movementY;
+})
+
 const pawn = new player(0,0,0,0,0);
 const square = new player(0,0,0,0,0);
 const world = document.getElementById(
@@ -75,6 +83,7 @@ const world = document.getElementById(
 
 //is jump at the moment?
 let isJump = 0;
+//height of which jump lift
 let height = 0;
 //direction of the jump
 let JumpUp = 1;
@@ -114,14 +123,21 @@ function update() {
     dx = PressRight - PressLeft;
     dz = PressBack - PressForward;
     dy = PressUp;
+    drx = MouseY;
+    dry = MouseX;
 
     //add movement to the coordinates
     pawn.x = pawn.x + dx;
     pawn.y = pawn.y + dy;
     pawn.z = pawn.z + dz;
+    pawn.rx = pawn.rx + drx;
+    pawn.ry = pawn.ry + dry;
 
     //change coordinates of the world
-    world.style.transform = "translate3d(" 
+    world.style.transform = 
+    "rotateX(" + (-pawn.rx) + "deg)" +
+    "rotateY(" + (-pawn.ry) + "deg)" +
+    "translate3d(" 
     + (-pawn.x) + "px," + (-pawn.y) + "px," 
     + (-pawn.z) + "px)";
 
