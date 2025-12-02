@@ -12,6 +12,7 @@ let PressRight = 0;
 let PressForward = 0;
 let PressBack = 0;
 let PressUp = 0;
+let PressSpace = 0;
 
 //if the key is pressed
 document.addEventListener("keydown", (event) => {
@@ -36,7 +37,7 @@ document.addEventListener("keydown", (event) => {
         PressUp = 1;
     }
     if(event.code === 'Space') {
-        console.log("siema");
+        PressSpace = 1;
     }
 })
 
@@ -61,25 +62,46 @@ document.addEventListener("keyup", (event) => {
     if(event.key == 32) {
         PressUp = 0;
     }
+    if(event.code === 'Space') {
+        PressSpace = 0;
+    }
 })
 
 const pawn = new player(0,0,0,0,0);
+const square = new player(0,0,0,0,0);
 const world = document.getElementById(
     "world"
 );
 
-/*let isJump = 0;
+//is jump at the moment?
+let isJump = 0;
+let height = 0;
+//direction of the jump
+let JumpUp = 1;
+const maxHeightOfJump = 20;
 function jump() {
-    if(isJump == 0) {
+    if(isJump == 0 ||
+        (isJump == 1 && height >= 0)
+    ) {
         isJump = 1;
 
-        for(let i = 0; i<10; ++i) {
-
+        if(height < maxHeightOfJump && JumpUp == 1) {
+            height++;
+        }
+        if(height > 0 && JumpUp == 0) {
+            height--;
+        }
+        if(height == maxHeightOfJump) {
+            JumpUp = 0;
+        }
+        if(height == 0 && JumpUp == 0) {
+            JumpUp = 1;
+            isJump = 0;
         }
 
-        isJump = 0;
+        world.style.top = ((height*10) + 0) + "px";
     }
-}*/
+}
 
 function update() {
     //count movement
@@ -97,8 +119,9 @@ function update() {
     + (-pawn.x) + "px," + (-pawn.y) + "px," 
     + (-pawn.z) + "px)";
 
-    //change coordinates of the square
-    // it will be something here...
+    if(PressSpace || isJump) {
+        jump();
+    }
 
     requestAnimationFrame(update);
 }
