@@ -18,6 +18,15 @@ let PressUp = 0;
 let PressSpace = 0;
 let MouseX = 0;
 let MouseY = 0;
+var lock = false;
+
+//link vriable to container
+var container = 
+document.getElementById("container");
+//if the mouse is pressed
+container.onclick = function() {
+    container.requestPointerLock();
+}
 
 //if the key is pressed
 document.addEventListener("keydown", (event) => {
@@ -72,6 +81,13 @@ document.addEventListener("keyup", (event) => {
     }
 })
 
+//locked mouse listner
+document.addEventListener("pointerlockchange",
+    (event) => {
+        lock = !lock;
+    }
+);
+
 //mouse movement listener
 document.addEventListener("mousemove", (event) => {
     MouseX = event.movementX;
@@ -95,18 +111,21 @@ const maxHeightOfJump = 20;
 /*one execution of the function
 is one tick of jump, so ju must
 execute this on update() function*/
-function jump() {
+function jump(dy) {
     if((PressSpace || isJump) &&
         (isJump == 0 ||
         (isJump == 1 && height >= 0))
     ) {
         isJump = 1;
+        let result;
 
         if(height < maxHeightOfJump && JumpUp == 1) {
             height++;
+            result = 1;
         }
         if(height > 0 && JumpUp == 0) {
             height--;
+            result = -1;
         }
         if(height == maxHeightOfJump) {
             JumpUp = 0;
@@ -117,8 +136,10 @@ function jump() {
             isJump = 0;
         }
 
-        world.style.top = ((height*10) + 0) + "px";
+        //world.style.top = ((height*10) + 0) + "px";
+        return dy + (-result)*10;
     }
+    return dy;
 }
 
 
@@ -132,18 +153,24 @@ function update() {
     (PressRight - PressLeft) -
     Math.cos(pawn.ry * deg) * 
     (PressForward - PressBack);
-    
+
     dy = PressUp;
     drx = MouseY;
     dry = - MouseX;
     MouseY = MouseX = 0;
 
+    //one tick for jump
+    dy = jump(dy);
+
     //add movement to the coordinates
     pawn.x = pawn.x + dx;
     pawn.y = pawn.y + dy;
     pawn.z = pawn.z + dz;
-    pawn.rx = pawn.rx + drx;
-    pawn.ry = pawn.ry + dry;
+    //if the mouse is locked
+    if(lock) {
+        pawn.rx = pawn.rx + drx;
+        pawn.ry = pawn.ry + dry;
+    }
 
     //change coordinates of the world
     world.style.transform = 
@@ -153,9 +180,6 @@ function update() {
     "translate3d(" 
     + (-pawn.x) + "px," + (-pawn.y) + "px," 
     + (-pawn.z) + "px)";
-
-    //one tick for jump
-    jump();
 
     requestAnimationFrame(update);
 }
