@@ -84,8 +84,9 @@ const maxHeightOfJump = 20;
 is one tick of jump, so ju must
 execute this on update() function*/
 function jump() {
-    if(isJump == 0 ||
-        (isJump == 1 && height >= 0)
+    if((PressSpace || isJump) &&
+        (isJump == 0 ||
+        (isJump == 1 && height >= 0))
     ) {
         isJump = 1;
 
@@ -98,6 +99,7 @@ function jump() {
         if(height == maxHeightOfJump) {
             JumpUp = 0;
         }
+        //reset state
         if(height == 0 && JumpUp == 0) {
             JumpUp = 1;
             isJump = 0;
@@ -123,9 +125,8 @@ function update() {
     + (-pawn.x) + "px," + (-pawn.y) + "px," 
     + (-pawn.z) + "px)";
 
-    if(PressSpace || isJump) {
-        jump();
-    }
+    //one tick for jump
+    jump();
 
     requestAnimationFrame(update);
 }
