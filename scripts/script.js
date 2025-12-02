@@ -118,6 +118,7 @@ function jump() {
     }
 }
 
+
 function update() {
     //count movement
     dx = PressRight - PressLeft;
@@ -125,6 +126,7 @@ function update() {
     dy = PressUp;
     drx = MouseY;
     dry = MouseX;
+    MouseY = MouseX = 0;
 
     //add movement to the coordinates
     pawn.x = pawn.x + dx;
@@ -135,6 +137,7 @@ function update() {
 
     //change coordinates of the world
     world.style.transform = 
+    "translateZ(600px)" +
     "rotateX(" + (-pawn.rx) + "deg)" +
     "rotateY(" + (-pawn.ry) + "deg)" +
     "translate3d(" 
