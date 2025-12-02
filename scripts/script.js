@@ -79,6 +79,10 @@ let height = 0;
 //direction of the jump
 let JumpUp = 1;
 const maxHeightOfJump = 20;
+
+/*one execution of the function
+is one tick of jump, so ju must
+execute this on update() function*/
 function jump() {
     if(isJump == 0 ||
         (isJump == 1 && height >= 0)
