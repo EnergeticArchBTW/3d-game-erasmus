@@ -1,3 +1,6 @@
+//world constant
+var deg = Math.PI/180;
+
 function player(x,y,z,rx,ry) {
     this.x = x;
     this.y = y;
@@ -121,11 +124,18 @@ function jump() {
 
 function update() {
     //count movement
-    dx = PressRight - PressLeft;
-    dz = PressBack - PressForward;
+    dx = Math.cos(pawn.ry * deg) * 
+    (PressRight - PressLeft) - 
+    Math.sin(pawn.ry * deg) * 
+    (PressForward - PressBack);
+    dz = - Math.sin(pawn.ry * deg) * 
+    (PressRight - PressLeft) -
+    Math.cos(pawn.ry * deg) * 
+    (PressForward - PressBack);
+    
     dy = PressUp;
     drx = MouseY;
-    dry = MouseX;
+    dry = - MouseX;
     MouseY = MouseX = 0;
 
     //add movement to the coordinates
