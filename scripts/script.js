@@ -20,7 +20,15 @@ let map = [
     [-1000, 0, 0, 0, -90, 0, 2000, 200, wall, 0.5], //left wall
     [0, 100, 0, 90, 0, 0, 2000, 2000, "patterns/dirt_top.jpeg"], //ground
 
-    [0,0,-1000,0,0,0,83,180,"patterns/door_resized.jpg"]
+    [0,0,-1000,0,0,0,83,180,"patterns/door_resized.jpg"],
+
+    //cube
+    [0, 0, -100, 0, 0, 0, 200, 200, "#0cea13ff"], //front wall
+    [0, 0, 100, 0, 0, 0, 200, 200, "#0bcbdcff"], //back wall
+    [100, 0, 0, 0, 90, 0, 200, 200, "#eb0804ff"], //right wall
+    [-100, 0, 0, 0, -90, 0, 200, 200, "#5e08e9ff"], //left wall
+    [0, 100, 0, 90, 0, 0, 200, 200, "#ef0d7eff"], //ground
+    [0, -100, 0, 90, 0, 0, 200, 200, "#f4e508ff"], //roof
 ]
 
 //variables for movement
