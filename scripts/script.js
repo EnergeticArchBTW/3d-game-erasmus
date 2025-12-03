@@ -9,6 +9,16 @@ function player(x,y,z,rx,ry) {
     this.ry = ry;
 }
 
+//rectangle Array
+let map = [
+    //X,Y,Z, RX, RY, RZ, Width, Height, C
+    [0, 0, -1000, 0, 0, 0, 2000, 200, "#F0C0FF"],
+    [0, 0, 1000, 0, 0, 0, 2000, 200, "#F0C0FF"],
+    [1000, 0, 0, 0, 90, 0, 2000, 200, "#F0C0FF"],
+    [-1000, 0, 0, 0, -90, 0, 2000, 200, "#F0C0FF"],
+    [0, 100, 0, 90, 0, 0, 2000, 200, "#02ffeeff"],
+]
+
 //variables for movement
 let PressLeft = 0;
 let PressRight = 0;
@@ -155,8 +165,8 @@ function update() {
     (PressForward - PressBack);
 
     dy = PressUp;
-    drx = MouseY;
-    dry = - MouseX;
+    drx = MouseY/4;
+    dry = - MouseX/4;
     MouseY = MouseX = 0;
 
     //one tick for jump
@@ -184,4 +194,30 @@ function update() {
     requestAnimationFrame(update);
 }
 
+function CreateNewWorld() {
+    for (let i = 0; i < map.length; ++i) {
+        // create rectangles and styles
+        let newElement 
+        = document.createElement("div");
+        newElement.className = "square";
+        newElement.id = "square" + i;
+        newElement.style.width = map[i][6] + "px";
+        newElement.style.height = map[i][7] + "px";
+        newElement.style.background = map[i][8];
+        newElement.style.transform = 
+        "translate3d(" + 
+        (600 - map[i][6]/2 + map[i][0]) + 
+        "px," + (400 - map[i][7]/2 +
+        map[i][1]) + "px," + 
+        map[i][2] + "px)" +
+        "rotateX(" + map[i][3] + "deg)" +
+        "rotateY(" + map[i][4] + "deg)" +
+        "rotateZ(" + map[i][5] + "deg)";
+
+        //insert rectangles int the world
+        world.append(newElement);
+    }
+}
+//generate new world
+CreateNewWorld();
 update();

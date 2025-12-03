@@ -17,23 +17,6 @@
     /*top: 70px;*/
 }
 
-#square1 {
+.square {
     position: absolute;
-    width: 200px;
-    height: 200px;
-    background-color: #FF0000;
-    transform: translate(-50%, -50%) /*rotateY(30deg)*/;
-    top:400px; /*height of square*/
-    left:600px;
-}
-
-#square2 {
-    position: absolute;
-    width: 1000px;
-    height: 1000px;
-    background-color: #FFFF00;
-    top: 400px;
-    left: 600px;
-    transform: translate(-50%, -50%)
-    rotateX(90deg) translateZ(-100px);
 }
