@@ -9,14 +9,16 @@ function player(x,y,z,rx,ry) {
     this.ry = ry;
 }
 
+let wall = "patterns/dirt_wall.png"
+
 //rectangle Array
 let map = [
     //X,Y,Z, RX, RY, RZ, Width, Height, C
-    [0, 0, -1000, 0, 0, 0, 2000, 200, "#F0C0FF"],
-    [0, 0, 1000, 0, 0, 0, 2000, 200, "#F0C0FF"],
-    [1000, 0, 0, 0, 90, 0, 2000, 200, "#F0C0FF"],
-    [-1000, 0, 0, 0, -90, 0, 2000, 200, "#F0C0FF"],
-    [0, 100, 0, 90, 0, 0, 2000, 2000, "#02ffeeff"],
+    [0, 0, -1000, 0, 0, 0, 2000, 200, wall],
+    [0, 0, 1000, 0, 0, 0, 2000, 200, wall],
+    [1000, 0, 0, 0, 90, 0, 2000, 200, wall],
+    [-1000, 0, 0, 0, -90, 0, 2000, 200, wall],
+    [0, 100, 0, 90, 0, 0, 2000, 2000, "patterns/dirt_top.jpeg"],
 ]
 
 //variables for movement
@@ -38,12 +40,23 @@ container.onclick = function() {
     container.requestPointerLock();
 }
 
+//timer for double click between two clicks
+let clickTimer = 301;
+//speed click
+let PressSpeed = 0;
+
 //if the key is pressed
 document.addEventListener("keydown", (event) => {
     if (event.key == "w" ||
         event.key == "ArrowUp"
     ) {
         PressForward = 1;
+
+        if(clickTimer < 300) {
+            console.log("speed");
+            PressSpeed = 1;
+            clickTimer = 0;
+        }
     }
     if(event.key == "s" ||
         event.key == "ArrowDown") {
@@ -70,6 +83,7 @@ document.addEventListener("keyup", (event) => {
     if (event.key == "w" ||
         event.key == "ArrowUp") {
         PressForward = 0;
+        PressSpeed = 0;
     }
     if(event.key == "s" ||
         event.key == "ArrowDown") {
@@ -145,7 +159,7 @@ function jump(dy) {
             JumpUp = 1;
             isJump = 0;
         }
-        
+
         return dy + (-result)*10;
     }
     return dy;
@@ -172,9 +186,9 @@ function update() {
     dy = jump(dy);
 
     //add movement to the coordinates
-    pawn.x = pawn.x + 4*dx;
-    pawn.y = pawn.y + 4*dy;
-    pawn.z = pawn.z + 4*dz;
+    pawn.x = pawn.x + 4*dx + 4*PressSpeed*dx;
+    pawn.y = pawn.y + 4*dy + 4*PressSpeed*dy;
+    pawn.z = pawn.z + 4*dz + 4*PressSpeed*dz;
 
     //if the mouse is locked
     if(lock) {
@@ -204,6 +218,8 @@ function CreateNewWorld() {
         newElement.style.width = map[i][6] + "px";
         newElement.style.height = map[i][7] + "px";
         newElement.style.background = map[i][8];
+        newElement.style.backgroundImage =
+        "url(" + map[i][8] + ")";
         newElement.style.transform = 
         "translate3d(" + 
         (600 - map[i][6]/2 + map[i][0]) + 
