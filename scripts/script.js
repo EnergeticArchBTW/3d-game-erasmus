@@ -16,8 +16,8 @@ let map = [
     //X,Y,Z, RX, RY, RZ, Width, Height, C
     [0, 0, -1000, 0, 0, 0, 2000, 200, wall], //front wall
     [0, 0, 1000, 0, 0, 0, 2000, 200, wall], //back wall
-    [1000, 0, 0, 0, 90, 0, 2000, 200, wall], //right wall
-    [-1000, 0, 0, 0, -90, 0, 2000, 200, wall], //left wall
+    [1000, 0, 0, 0, 90, 0, 2000, 200, wall, 0.5], //right wall
+    [-1000, 0, 0, 0, -90, 0, 2000, 200, wall, 0.5], //left wall
     [0, 100, 0, 90, 0, 0, 2000, 2000, "patterns/dirt_top.jpeg"], //ground
 
     [0,0,-1000,0,0,0,83,180,"patterns/door_resized.jpg"]
@@ -222,6 +222,7 @@ function CreateNewWorld() {
         newElement.style.background = map[i][8];
         newElement.style.backgroundImage =
         "url(" + map[i][8] + ")";
+        newElement.style.opacity = map[i][9];
         newElement.style.transform = 
         "translate3d(" + 
         (600 - map[i][6]/2 + map[i][0]) + 
