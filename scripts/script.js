@@ -116,7 +116,7 @@ let isJump = 0;
 let height = 0;
 //direction of the jump
 let JumpUp = 1;
-const maxHeightOfJump = 20;
+const maxHeightOfJump = 15;
 
 /*one execution of the function
 is one tick of jump, so ju must
@@ -145,8 +145,7 @@ function jump(dy) {
             JumpUp = 1;
             isJump = 0;
         }
-
-        //world.style.top = ((height*10) + 0) + "px";
+        
         return dy + (-result)*10;
     }
     return dy;
@@ -173,9 +172,10 @@ function update() {
     dy = jump(dy);
 
     //add movement to the coordinates
-    pawn.x = pawn.x + dx;
-    pawn.y = pawn.y + dy;
-    pawn.z = pawn.z + dz;
+    pawn.x = pawn.x + 4*dx;
+    pawn.y = pawn.y + 4*dy;
+    pawn.z = pawn.z + 4*dz;
+
     //if the mouse is locked
     if(lock) {
         pawn.rx = pawn.rx + drx;
