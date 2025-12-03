@@ -9,16 +9,18 @@ function player(x,y,z,rx,ry) {
     this.ry = ry;
 }
 
-let wall = "patterns/dirt_wall.png"
+let wall = "patterns/dirt_wall_resized.png"
 
 //rectangle Array
 let map = [
     //X,Y,Z, RX, RY, RZ, Width, Height, C
-    [0, 0, -1000, 0, 0, 0, 2000, 200, wall],
-    [0, 0, 1000, 0, 0, 0, 2000, 200, wall],
-    [1000, 0, 0, 0, 90, 0, 2000, 200, wall],
-    [-1000, 0, 0, 0, -90, 0, 2000, 200, wall],
-    [0, 100, 0, 90, 0, 0, 2000, 2000, "patterns/dirt_top.jpeg"],
+    [0, 0, -1000, 0, 0, 0, 2000, 200, wall], //front wall
+    [0, 0, 1000, 0, 0, 0, 2000, 200, wall], //back wall
+    [1000, 0, 0, 0, 90, 0, 2000, 200, wall], //right wall
+    [-1000, 0, 0, 0, -90, 0, 2000, 200, wall], //left wall
+    [0, 100, 0, 90, 0, 0, 2000, 2000, "patterns/dirt_top.jpeg"], //ground
+
+    [0,0,-1000,0,0,0,83,180,"patterns/door_resized.jpg"]
 ]
 
 //variables for movement
