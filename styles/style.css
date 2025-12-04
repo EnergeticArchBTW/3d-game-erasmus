@@ -55,3 +55,18 @@
     top:450px;
     left:150px;
 }
+
+p {
+    position: absolute;
+    font-size: 60px;
+    top: 50%;
+    left: 50%;
+    margin: 0px;
+    transform: translate(-50%, -50%);
+    font-family: avezon;
+}
+
+@font-face {
+    font-family: avezon;
+    src:url("../fonts/AVEZON.ttf");
+}
