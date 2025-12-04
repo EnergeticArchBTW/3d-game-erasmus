@@ -61,8 +61,10 @@ container.onclick = function() {
     container.requestPointerLock();
 }
 
+//period between 2 clicks that powers on speed
+const periodBetweenClicks = 11;
 //timer for double click between two clicks
-let clickTimer = 301;
+let clickTimer = periodBetweenClicks;
 //speed click
 let PressSpeed = 0;
 
@@ -71,16 +73,11 @@ document.addEventListener("keydown", (event) => {
     if (event.key == "w" ||
         event.key == "ArrowUp"
     ) {
-        if(!PressForward) {
-            PressForward = 1;
-        } else {
-            PressForward = 1;
+        PressForward = 1;
 
-            if(clickTimer < 300) {
-                console.log("speed");
-                PressSpeed = 1;
-                clickTimer = 0;
-            }
+        if(clickTimer < periodBetweenClicks) {
+            console.log("speed");
+            PressSpeed = 1;
         }
     }
     if(event.key == "s" ||
@@ -109,6 +106,7 @@ document.addEventListener("keyup", (event) => {
         event.key == "ArrowUp") {
         PressForward = 0;
         PressSpeed = 0;
+        clickTimer = 0;
     }
     if(event.key == "s" ||
         event.key == "ArrowDown") {
@@ -211,14 +209,19 @@ function update() {
     dy = jump(dy);
 
     //add movement to the coordinates
-    pawn.x = pawn.x + 4*dx + 4*PressSpeed*dx;
-    pawn.y = pawn.y + 4*dy + 4*PressSpeed*dy;
-    pawn.z = pawn.z + 4*dz + 4*PressSpeed*dz;
+    pawn.x = pawn.x + 4*dx + 8*PressSpeed*dx;
+    pawn.y = pawn.y + 4*dy;
+    pawn.z = pawn.z + 4*dz + 8*PressSpeed*dz;
 
     //if the mouse is locked
     if(lock) {
         pawn.rx = pawn.rx + drx;
         pawn.ry = pawn.ry + dry;
+    }
+
+    //update timer for cheking if this is double w
+    if(clickTimer < periodBetweenClicks) {
+        ++clickTimer;
     }
 
     //change coordinates of the world
