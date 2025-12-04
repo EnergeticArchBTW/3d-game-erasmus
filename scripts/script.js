@@ -56,12 +56,14 @@ let PressSpace = 0;
 let MouseX = 0;
 let MouseY = 0;
 var lock = false;
+let canlock = false;
 
 //link vriable to container
 var container = 
 document.getElementById("container");
 //if the mouse is pressed
 container.onclick = function() {
+    if(canlock)
     container.requestPointerLock();
 }
 
