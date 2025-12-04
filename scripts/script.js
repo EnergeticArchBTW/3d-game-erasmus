@@ -29,6 +29,17 @@ let map = [
     [-100, 0, 0, 0, -90, 0, 200, 200, "#5e08e9ff"], //left wall
     [0, 100, 0, 90, 0, 0, 200, 200, "#ef0d7eff"], //ground
     [0, -100, 0, 90, 0, 0, 200, 200, "#f4e508ff"], //roof
+
+    //walls for maze
+    [350, 0, 0, 0, 0, 0, 500, 200, "#0cea13ff"],
+    [600, 0, 0, 0, 90, 0, 1600, 200, "#dfea0cff"],
+    [0, 0, -800, 0, 0, 0, 1200, 200, "#0cd4eaff"],
+    [-600, 0, -200, 0, 90, 0, 1200, 200, "#ea5a0cff"],
+    [-350, 0, -200, 0, -90, 0, 1200, 200, "#5e08e9ff"],
+    [-100, 0, -300, 0, -90, 0, 400, 200, "#f107b7ff"],
+    [100, 0, -500, 0, 0, 0, 400, 200, "#0cea13ff"],
+    [0, 0, 250, 0, 90, 0, 300, 200, "#eb0804ff"],
+    [0, 0, 800, 0, 0, 0, 1200, 200, "#0cd4eaff"],
 ]
 
 //variables for movement
@@ -60,12 +71,16 @@ document.addEventListener("keydown", (event) => {
     if (event.key == "w" ||
         event.key == "ArrowUp"
     ) {
-        PressForward = 1;
+        if(!PressForward) {
+            PressForward = 1;
+        } else {
+            PressForward = 1;
 
-        if(clickTimer < 300) {
-            console.log("speed");
-            PressSpeed = 1;
-            clickTimer = 0;
+            if(clickTimer < 300) {
+                console.log("speed");
+                PressSpeed = 1;
+                clickTimer = 0;
+            }
         }
     }
     if(event.key == "s" ||
