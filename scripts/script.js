@@ -81,7 +81,7 @@ document.addEventListener("keydown", (event) => {
     ) {
         PressForward = 1;
 
-        if(clickTimer < periodBetweenClicks) {
+        if(clickTimer < periodBetweenClicks || event.ctrlKey) {
             console.log("speed");
             PressSpeed = 1;
         }
@@ -215,9 +215,9 @@ function update() {
     dy = jump(dy);
 
     //add movement to the coordinates
-    pawn.x = pawn.x + 4*dx + 8*PressSpeed*dx;
+    pawn.x = pawn.x + 4*dx + 16*PressSpeed*dx;
     pawn.y = pawn.y + 4*dy;
-    pawn.z = pawn.z + 4*dz + 8*PressSpeed*dz;
+    pawn.z = pawn.z + 4*dz + 16*PressSpeed*dz;
 
     //if the mouse is locked
     if(lock) {
