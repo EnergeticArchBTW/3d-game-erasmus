@@ -20,11 +20,11 @@ button1.onclick = function() {
 button2.onclick = function() {
     clickSound.play();
     menu1.style.display = "none";
-    menu2.style.display = "block";
+    menu2.style.display = "flex";
 }
 
 button3.onclick = function() {
     clickSound.play();
-    menu1.style.display = "block";
+    menu1.style.display = "flex";
     menu2.style.display = "none";
 }
