@@ -21,10 +21,21 @@ button2.onclick = function() {
     clickSound.play();
     menu1.style.display = "none";
     menu2.style.display = "flex";
+    menu3.style.display = "none";
 }
 
 button3.onclick = function() {
     clickSound.play();
+    menu1.style.display = "none";
+    menu2.style.display = "none";
+    menu3.style.display = "flex";
+}
+
+button4.onclick = function() {
+    clickSound.play();
     menu1.style.display = "flex";
     menu2.style.display = "none";
+    menu3.style.display = "none";
 }
+
+button5.onclick = button4.onclick;
