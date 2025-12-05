@@ -46,6 +46,16 @@ let map = [
     [-700, 0, -800, 0, 0, 0, 200, 200, "#13b72cff"],
 ]
 
+let coins = [
+    [300,30,-500,0,0,0,50,50,"#FFFF00"],
+    [-300,30,800,0,0,0,50,50,"#FFFF00"],
+    [-100,50,-200,0,0,0,50,50,"#FFFF00"],
+]
+
+let keys = [
+    [900, 30, 900,0,0,0,50,50,"#FF0000"]
+]
+
 //variables for movement
 let PressLeft = 0;
 let PressRight = 0;
@@ -243,32 +253,37 @@ function update() {
 }
 
 function CreateNewWorld() {
-    for (let i = 0; i < map.length; ++i) {
+    createSquares(map, "map");
+}
+
+function createSquares(squares, string) {
+    for (let i = 0; i < squares.length; ++i) {
         // create rectangles and styles
         let newElement 
         = document.createElement("div");
-        newElement.className = "square";
-        newElement.id = "square" + i;
-        newElement.style.width = map[i][6] + "px";
-        newElement.style.height = map[i][7] + "px";
-        newElement.style.background = map[i][8];
+        newElement.className = string + " square";
+        newElement.id = string + i;
+        newElement.style.width = squares[i][6] + "px";
+        newElement.style.height = squares[i][7] + "px";
+        newElement.style.background = squares[i][8];
         newElement.style.backgroundImage =
-        "url(" + map[i][8] + ")";
-        newElement.style.opacity = map[i][9];
+        "url(" + squares[i][8] + ")";
+        newElement.style.opacity = squares[i][9];
         newElement.style.transform = 
         "translate3d(" + 
-        (600 - map[i][6]/2 + map[i][0]) + 
-        "px," + (400 - map[i][7]/2 +
-        map[i][1]) + "px," + 
-        map[i][2] + "px)" +
-        "rotateX(" + map[i][3] + "deg)" +
-        "rotateY(" + map[i][4] + "deg)" +
-        "rotateZ(" + map[i][5] + "deg)";
+        (600 - squares[i][6]/2 + squares[i][0]) + 
+        "px," + (400 - squares[i][7]/2 +
+        squares[i][1]) + "px," + 
+        squares[i][2] + "px)" +
+        "rotateX(" + squares[i][3] + "deg)" +
+        "rotateY(" + squares[i][4] + "deg)" +
+        "rotateZ(" + squares[i][5] + "deg)";
 
         //insert rectangles int the world
         world.append(newElement);
     }
 }
+
 //generate new world
 CreateNewWorld();
 update();

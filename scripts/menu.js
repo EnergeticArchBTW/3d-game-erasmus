@@ -13,6 +13,8 @@ button1.onclick = function() {
     menu1.style.display = "none";
     //generation of the world
     CreateNewWorld();
+    createSquares(coins, "coin");
+    createSquares(keys, "key");
     //TimerGame = setInterval(update,10);
     canlock = true;
 }
