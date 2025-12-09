@@ -15,7 +15,7 @@ button1.onclick = function() {
     CreateNewWorld();
     createSquares(coins, "coin");
     createSquares(keys, "key");
-    //TimerGame = setInterval(update,10);
+    TimerGame = setInterval(repeatForever,15);
     canlock = true;
 }
 
@@ -41,3 +41,31 @@ button4.onclick = function() {
 }
 
 button5.onclick = button4.onclick;
+
+function iteration(squares, string) {
+    for(let i = 0; i < squares.length; i++) {
+        let r = (squares[i][0] - pawn.x)**2 +
+        (squares[i][1] - pawn.y)**2 +
+        (squares[i][2] - pawn.z)**2;
+        let r1 = squares[i][6]**2;
+        if(i==0)
+        console.log(r + " " +
+        squares[i][0] + " " + 
+        squares[i][1] + " " + squares[i][2] +
+        " " + pawn.x + " " + pawn.y +
+        " " + pawn.z + " " + r1);
+        if(r < r1) {
+            document.getElementById(string + i)
+            .style.display = "none";
+            squares[i][0] = 1000000;
+            squares[i][1] = 1000000;
+            squares[i][2] = 1000000;
+        }
+    }
+}
+
+function repeatForever() {
+    update();
+    //iteration(coins, "coin");
+    iteration(keys, "key");
+}

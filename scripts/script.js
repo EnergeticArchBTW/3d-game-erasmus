@@ -47,13 +47,13 @@ let map = [
 ]
 
 let coins = [
-    [300,30,-500,0,0,0,50,50,"#FFFF00"],
-    [-300,30,800,0,0,0,50,50,"#FFFF00"],
-    [-100,50,-200,0,0,0,50,50,"#FFFF00"],
+    [300,60,-500,0,0,0,50,50,"#FFFF00", 50],
+    [-300,60,800,0,0,0,50,50,"#FFFF00", 50],
+    [-100,60,-200,0,0,0,50,50,"#FFFF00", 50],
 ]
 
 let keys = [
-    [900, 30, 900,0,0,0,50,50,"#FF0000"]
+    [900, 0, 900,0,0,0,50,50,"#FF0000", 50]
 ]
 
 //variables for movement
@@ -249,7 +249,7 @@ function update() {
     + (-pawn.x) + "px," + (-pawn.y) + "px," 
     + (-pawn.z) + "px)";
 
-    requestAnimationFrame(update);
+    //requestAnimationFrame(update);
 }
 
 function CreateNewWorld() {
@@ -269,6 +269,7 @@ function createSquares(squares, string) {
         newElement.style.backgroundImage =
         "url(" + squares[i][8] + ")";
         newElement.style.opacity = squares[i][9];
+        newElement.style.borderRadius = squares[i][9] + "%";
         newElement.style.transform = 
         "translate3d(" + 
         (600 - squares[i][6]/2 + squares[i][0]) + 
@@ -286,4 +287,4 @@ function createSquares(squares, string) {
 
 //generate new world
 CreateNewWorld();
-update();
+//update();
