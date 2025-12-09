@@ -5,10 +5,11 @@ let button1 = document.getElementById("button1");
 let button2 = document.getElementById("button2");
 let button3 = document.getElementById("button3");
 let clickSound = new Audio;
-clickSound.src = "Sounds/start-game.wav";
 
 //create navigation
+//start game
 button1.onclick = function() {
+    clickSound.src = "Sounds/start-game.wav";
     clickSound.play();
     menu1.style.display = "none";
     //generation of the world
@@ -19,21 +20,27 @@ button1.onclick = function() {
     canlock = true;
 }
 
+//instructions
 button2.onclick = function() {
+    clickSound.src = "Sounds/instructions.wav";
     clickSound.play();
     menu1.style.display = "none";
     menu2.style.display = "flex";
     menu3.style.display = "none";
 }
 
+//rules
 button3.onclick = function() {
+    clickSound.src = "Sounds/instructions.wav";
     clickSound.play();
     menu1.style.display = "none";
     menu2.style.display = "none";
     menu3.style.display = "flex";
 }
 
+//go back to main maenu
 button4.onclick = function() {
+    clickSound.src = "Sounds/instructions.wav";
     clickSound.play();
     menu1.style.display = "flex";
     menu2.style.display = "none";
