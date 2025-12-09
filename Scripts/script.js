@@ -47,13 +47,13 @@ let map = [
 ]
 
 let coins = [
-    [300,0,-500,0,0,0,50,50,"#FFFF00", 50],
-    [-300,0,800,0,0,0,50,50,"#FFFF00", 50],
-    [-100,0,-200,0,0,0,50,50,"#FFFF00", 50],
+    [300,40,-500,0,0,0,50,50,"#FFFF00", 50],
+    [-300,40,800,0,0,0,50,50,"#FFFF00", 50],
+    [-100,40,-200,0,0,0,50,50,"#FFFF00", 50],
 ]
 
 let keys = [
-    [900, 0, 900,0,0,0,50,50,"#FF0000", 50]
+    [900, 40, 900,0,0,0,50,50,"#FF0000", 50]
 ]
 
 //variables for movement
@@ -156,7 +156,7 @@ document.addEventListener("mousemove", (event) => {
     MouseY = event.movementY;
 })
 
-const pawn = new player(0,0,0,0,0);
+const pawn = new player(0,40,0,0,0);
 const square = new player(0,0,0,0,0);
 const world = document.getElementById(
     "world"
