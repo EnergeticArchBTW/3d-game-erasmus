@@ -9,7 +9,7 @@ function player(x,y,z,rx,ry) {
     this.ry = ry;
 }
 
-let wall = "patterns/dirt_wall_resized.png"
+let wall = "Patterns/dirt_wall_resized.png"
 
 //rectangle Array
 let map = [
@@ -18,9 +18,9 @@ let map = [
     [0, 0, 1000, 0, 0, 0, 2000, 200, wall], //back wall
     [1000, 0, 0, 0, 90, 0, 2000, 200, wall, 0.5], //right wall
     [-1000, 0, 0, 0, -90, 0, 2000, 200, wall, 0.5], //left wall
-    [0, 100, 0, 90, 0, 0, 2000, 2000, "patterns/dirt_top.jpeg"], //ground
+    [0, 100, 0, 90, 0, 0, 2000, 2000, "Patterns/dirt_top.jpeg"], //ground
 
-    [0,0,-1000,0,0,0,83,180,"patterns/door_resized.jpg"],
+    [0,0,-1000,0,0,0,83,180,"Patterns/door_resized.jpg"],
 
     //cube
     [0, 0, -100, 0, 0, 0, 200, 200, "#0cea13ff"], //front wall

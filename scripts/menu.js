@@ -5,7 +5,7 @@ let button1 = document.getElementById("button1");
 let button2 = document.getElementById("button2");
 let button3 = document.getElementById("button3");
 let clickSound = new Audio;
-clickSound.src = "sounds/start-game.wav";
+clickSound.src = "Sounds/start-game.wav";
 
 //create navigation
 button1.onclick = function() {
