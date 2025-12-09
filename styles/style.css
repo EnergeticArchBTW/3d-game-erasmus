@@ -22,10 +22,12 @@ body {
 #world {
     position: absolute;
     /* get from #container */
-    width: inherit;
-    height: inherit;
+    width: 1200px;
+    height: 800px;
     /* background-color: #C0FFFF; */
     transform-style:preserve-3d;
+    top: calc(50% - 400px); /* centering relative to #container */
+    left: calc(50% - 600px);
 }
 
 .square {
