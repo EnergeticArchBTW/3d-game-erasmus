@@ -56,6 +56,8 @@ function iteration(squares, string) {
         (squares[i][2] - pawn.z)**2;
         let r1 = squares[i][6]**2;
         if(r < r1) {
+            clickSound.src = "Sounds/collect_coin.mp3";
+            clickSound.play();
             document.getElementById(string + i)
             .style.display = "none";
             squares[i][0] = 1000000;
