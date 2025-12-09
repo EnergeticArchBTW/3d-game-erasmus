@@ -48,12 +48,6 @@ function iteration(squares, string) {
         (squares[i][1] - pawn.y)**2 +
         (squares[i][2] - pawn.z)**2;
         let r1 = squares[i][6]**2;
-        if(i==0)
-        console.log(r + " " +
-        squares[i][0] + " " + 
-        squares[i][1] + " " + squares[i][2] +
-        " " + pawn.x + " " + pawn.y +
-        " " + pawn.z + " " + r1);
         if(r < r1) {
             document.getElementById(string + i)
             .style.display = "none";
@@ -66,6 +60,6 @@ function iteration(squares, string) {
 
 function repeatForever() {
     update();
-    //iteration(coins, "coin");
+    iteration(coins, "coin");
     iteration(keys, "key");
 }

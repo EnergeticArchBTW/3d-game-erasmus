@@ -47,9 +47,9 @@ let map = [
 ]
 
 let coins = [
-    [300,60,-500,0,0,0,50,50,"#FFFF00", 50],
-    [-300,60,800,0,0,0,50,50,"#FFFF00", 50],
-    [-100,60,-200,0,0,0,50,50,"#FFFF00", 50],
+    [300,0,-500,0,0,0,50,50,"#FFFF00", 50],
+    [-300,0,800,0,0,0,50,50,"#FFFF00", 50],
+    [-100,0,-200,0,0,0,50,50,"#FFFF00", 50],
 ]
 
 let keys = [
@@ -92,7 +92,6 @@ document.addEventListener("keydown", (event) => {
         PressForward = 1;
 
         if(clickTimer < periodBetweenClicks || event.ctrlKey) {
-            console.log("speed");
             PressSpeed = 1;
         }
     }
