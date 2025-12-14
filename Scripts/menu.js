@@ -68,6 +68,8 @@ function iteration(squares, string) {
         }
         if(points >= 4) {
             alert("You collected all coins! Congratulations!");
+            PressForward = 0;
+            PressSpeed = 0;
             points = 0;
         }
     }
