@@ -5,6 +5,7 @@ let button1 = document.getElementById("button1");
 let button2 = document.getElementById("button2");
 let button3 = document.getElementById("button3");
 let clickSound = new Audio;
+let points = 0;
 
 //create navigation
 //start game
@@ -63,6 +64,11 @@ function iteration(squares, string) {
             squares[i][0] = 1000000;
             squares[i][1] = 1000000;
             squares[i][2] = 1000000;
+            points++;
+        }
+        if(points >= 4) {
+            alert("You collected all coins! Congratulations!");
+            points = 0;
         }
     }
 }
