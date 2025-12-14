@@ -85,10 +85,13 @@ const periodBetweenClicks = 11;
 let clickTimer = periodBetweenClicks;
 //speed click
 let PressSpeed = 0;
+//speed multiplier for shift
+let shiftMultiplier = 1;
 
 //if the key is pressed
 document.addEventListener("keydown", (event) => {
     if (event.key == "w" ||
+        event.key == "W" ||
         event.key == "ArrowUp"
     ) {
         PressForward = 1;
@@ -98,14 +101,17 @@ document.addEventListener("keydown", (event) => {
         }
     }
     if(event.key == "s" ||
+        event.key == "S" ||
         event.key == "ArrowDown") {
         PressBack = 1;
     }
     if (event.key == "d" ||
+        event.key == "D" ||
         event.key == "ArrowRight") {
         PressRight = 1;
     }
     if (event.key == "a" ||
+        event.key == "A" ||
         event.key == "ArrowLeft") {
         PressLeft = 1;
     }
@@ -115,25 +121,32 @@ document.addEventListener("keydown", (event) => {
     if(event.code === 'Space') {
         PressSpace = 1;
     }
+    if(event.key == "Shift") {
+        shiftMultiplier = 0.5;
+    }
 })
 
 //if the key is released
 document.addEventListener("keyup", (event) => {
     if (event.key == "w" ||
+        event.key == "W" ||
         event.key == "ArrowUp") {
         PressForward = 0;
         PressSpeed = 0;
         clickTimer = 0;
     }
     if(event.key == "s" ||
+        event.key == "S" ||
         event.key == "ArrowDown") {
         PressBack = 0;
     }
     if (event.key == "d" ||
+        event.key == "D" ||
         event.key == "ArrowRight") {
         PressRight = 0;
     }
     if (event.key == "a" ||
+        event.key == "A" ||
         event.key == "ArrowLeft") {
         PressLeft = 0;
     }
@@ -142,6 +155,9 @@ document.addEventListener("keyup", (event) => {
     }
     if(event.code === 'Space') {
         PressSpace = 0;
+    }
+    if(event.key == "Shift") {
+        shiftMultiplier = 1;
     }
 })
 
@@ -226,9 +242,9 @@ function update() {
     dy = jump(dy);
 
     //add movement to the coordinates
-    pawn.x = pawn.x + 4*dx + 16*PressSpeed*dx;
+    pawn.x = pawn.x + (4*dx + 16*PressSpeed*dx)*shiftMultiplier;
     pawn.y = pawn.y + 4*dy;
-    pawn.z = pawn.z + 4*dz + 16*PressSpeed*dz;
+    pawn.z = pawn.z + (4*dz + 16*PressSpeed*dz)*shiftMultiplier;
 
     //if the mouse is locked
     if(lock) {
