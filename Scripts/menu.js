@@ -64,6 +64,7 @@ function iteration(squares, string) {
             squares[i][0] = 1000000;
             squares[i][1] = 1000000;
             squares[i][2] = 1000000;
+            document.getElementById(string + i).remove();
             points++;
         }
         if(points >= 4) {
@@ -71,6 +72,10 @@ function iteration(squares, string) {
             PressForward = 0;
             PressSpeed = 0;
             points = 0;
+            menu1.style.display = "flex";
+            menu2.style.display = "none";
+            menu3.style.display = "none";
+            clearInterval(TimerGame);
         }
     }
 }

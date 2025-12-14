@@ -48,15 +48,9 @@ let map = [
 
 coin_texture = "Patterns/coin.svg"
 
-let coins = [
-    [450,40,-500,0,0,0,50,50,coin_texture, 50],
-    [-200,40,600,0,0,0,50,50,coin_texture, 50],
-    [-200,40,-200,0,0,0,50,50,coin_texture, 50],
-]
+let coins = [];
 
-let keys = [
-    [900, 40, 900,0,0,0,50,50,"Patterns/red_coin.svg", 50]
-]
+let keys = [];
 
 //variables for movement
 let PressLeft = 0;
@@ -308,6 +302,17 @@ function update() {
 }
 
 function CreateNewWorld() {
+    pawn.x = 0;
+    pawn.z = 0;
+    coins = [
+    [450,40,-500,0,0,0,50,50,coin_texture, 50],
+    [-200,40,600,0,0,0,50,50,coin_texture, 50],
+    [-200,40,-200,0,0,0,50,50,coin_texture, 50],
+    ]
+
+    keys = [
+    [900, 40, 900,0,0,0,50,50,"Patterns/red_coin.svg", 50]
+    ]
     createSquares(map, "map");
 }
 
