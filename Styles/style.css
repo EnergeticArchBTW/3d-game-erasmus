@@ -45,6 +45,15 @@ body {
     align-items: center;
     text-align: center;
     gap: 30px 450px;
+
+    /* Make sure the path to the image is correct relative to the CSS file */
+    background-image: url('../Patterns/sky.png');
+    /* Stretch the image to cover the entire background of the element */
+    background-size: cover; 
+    /* Center the image */
+    background-position: center;
+    /* Prevent the image from repeating */
+    background-repeat: no-repeat;
 }
 
 .button {
