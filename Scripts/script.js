@@ -82,11 +82,15 @@ container.onclick = function() {
 //period between 2 clicks that powers on speed
 const periodBetweenClicks = 11;
 //timer for double click between two clicks
-let clickTimer = periodBetweenClicks;
+let clickTimerSpeed = periodBetweenClicks;
 //speed click
 let PressSpeed = 0;
 //speed multiplier for shift
 let shiftMultiplier = 1;
+//timer for space click
+let clickTimerSpace = periodBetweenClicks;
+//is player flying
+let isFlying = 0;
 
 //if the key is pressed
 document.addEventListener("keydown", (event) => {
@@ -96,7 +100,7 @@ document.addEventListener("keydown", (event) => {
     ) {
         PressForward = 1;
 
-        if(clickTimer < periodBetweenClicks || event.ctrlKey) {
+        if(clickTimerSpeed < periodBetweenClicks || event.ctrlKey) {
             PressSpeed = 1;
         }
     }
@@ -120,6 +124,10 @@ document.addEventListener("keydown", (event) => {
     }
     if(event.code === 'Space') {
         PressSpace = 1;
+
+        if(clickTimerSpace < periodBetweenClicks) {
+            isFlying = !isFlying;
+        }
     }
     if(event.key == "Shift") {
         shiftMultiplier = 0.5;
@@ -133,7 +141,7 @@ document.addEventListener("keyup", (event) => {
         event.key == "ArrowUp") {
         PressForward = 0;
         PressSpeed = 0;
-        clickTimer = 0;
+        clickTimerSpeed = 0;
     }
     if(event.key == "s" ||
         event.key == "S" ||
@@ -155,6 +163,7 @@ document.addEventListener("keyup", (event) => {
     }
     if(event.code === 'Space') {
         PressSpace = 0;
+        clickTimerSpace = 0;
     }
     if(event.key == "Shift") {
         shiftMultiplier = 1;
@@ -194,7 +203,8 @@ execute this on update() function*/
 function jump(dy) {
     if((PressSpace || isJump) &&
         (isJump == 0 ||
-        (isJump == 1 && height >= 0))
+        (isJump == 1 && height >= 0) &&
+        isFlying == 0)
     ) {
         isJump = 1;
         let result;
@@ -217,7 +227,18 @@ function jump(dy) {
         }
 
         return dy + (-result)*10;
+    } else if(isFlying) {
+        //reset state
+        isJump = 0;
+        JumpUp = 1;
+        height = 0;
     }
+
+    if(isJump == 0 && pawn.y < 40 && isFlying == 0) {
+        //if fall down ended but thre is no ground
+        return dy + 10;
+    }
+
     return dy;
 }
 
@@ -253,8 +274,12 @@ function update() {
     }
 
     //update timer for cheking if this is double w
-    if(clickTimer < periodBetweenClicks) {
-        ++clickTimer;
+    if(clickTimerSpeed < periodBetweenClicks) {
+        ++clickTimerSpeed;
+    }
+    //update timer for cheking if this is space
+    if(clickTimerSpace < periodBetweenClicks) {
+        ++clickTimerSpace;
     }
 
     //change coordinates of the world
