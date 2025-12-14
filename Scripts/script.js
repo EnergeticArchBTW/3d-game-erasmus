@@ -87,6 +87,8 @@ let clickTimerSpeed = periodBetweenClicks;
 let PressSpeed = 0;
 //speed multiplier for shift
 let shiftMultiplier = 1;
+//press shift
+let PressShift = 0;
 //timer for space click
 let clickTimerSpace = periodBetweenClicks;
 //is player flying
@@ -131,6 +133,7 @@ document.addEventListener("keydown", (event) => {
     }
     if(event.key == "Shift") {
         shiftMultiplier = 0.5;
+        PressShift = 1;
     }
 })
 
@@ -167,6 +170,7 @@ document.addEventListener("keyup", (event) => {
     }
     if(event.key == "Shift") {
         shiftMultiplier = 1;
+        PressShift = 0;
     }
 })
 
@@ -271,6 +275,15 @@ function update() {
     if(lock) {
         pawn.rx = pawn.rx + drx;
         pawn.ry = pawn.ry + dry;
+    }
+
+    //if you fly and press shift, you go down
+    if(isFlying && PressShift) {
+        pawn.y = pawn.y + 10;
+    }
+    //if you are on the ground you are not flying
+    if(pawn.y == 40 && isFlying) {
+        isFlying = 0;
     }
 
     //update timer for cheking if this is double w
