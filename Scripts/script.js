@@ -30,6 +30,17 @@ let map = [
     [0, 100, 0, 90, 0, 0, 200, 200, "#ef0d7eff"], //ground
     [0, -100, 0, 90, 0, 0, 200, 200, "#f4e508ff"], //roof
 
+    //cube #2
+    [250, 0, 400, 0, 0, 0, 200, 200, "#0cea13ff"], //front wall
+    [312.5, 0, 600, 0, 0, 0, 75, 200, "#0bcbdcff"], //back wall
+    [186.5, 0, 600, 0, 0, 0, 75, 200, "rgb(21, 206, 116)"], //back wall
+    [350, 0, 500, 0, 90, 0, 200, 200, "#eb0804ff"], //right wall
+    [150, 0, 500, 0, -90, 0, 200, 200, "#5e08e9ff"], //left wall
+    [250, 100, 500, 90, 0, 0, 200, 200, "#ef0d7eff"], //ground
+    [250, 0, 500, -90, 200, 0, 200, 200, "rgb(239, 156, 13)"], //ground
+    [250, 0, 500, 90, 100, 0, 200, 200, "rgb(72, 3, 20)"], //ground
+    [250, -100, 500, 90, 0, 0, 200, 200, "#f4e508ff"], //roof
+
     //walls for maze
     [350, 0, 0, 0, 0, 0, 500, 200, "Patterns/brick_wall.jpg"],
     [600, 0, 0, 0, 90, 0, 1600, 200, "Patterns/brick_wall.jpg"],
@@ -100,6 +111,19 @@ document.addEventListener("keydown", (event) => {
             PressSpeed = 1;
         }
     }
+
+    if (event.key == "s" ||
+        event.key == "S" ||
+        event.key == "ArrowDown"
+    ) {
+        PressBack = 1;
+
+        if(clickTimerSpeed < periodBetweenClicks || event.ctrlKey) {
+            PressSpeed = 1;
+        }
+    }
+
+    /*        */
     if(event.key == "s" ||
         event.key == "S" ||
         event.key == "ArrowDown") {
@@ -144,6 +168,8 @@ document.addEventListener("keyup", (event) => {
         event.key == "S" ||
         event.key == "ArrowDown") {
         PressBack = 0;
+        PressSpeed = 0;
+        clickTimerSpeed = 0;
     }
     if (event.key == "d" ||
         event.key == "D" ||
