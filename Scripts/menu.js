@@ -66,7 +66,7 @@ function iteration(squares, string, num) {
             squares[i][0] = 1000000;
             squares[i][1] = 1000000;
             squares[i][2] = 1000000;
-            num[0]++;
+            num++;
             console.log("item: ",num,"coins: ", c[0], "keys: ",k[0]);
             document.getElementById(string + i).remove();
             points++;
