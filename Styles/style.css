@@ -79,3 +79,7 @@ p {
     font-family: avezon;
     src:url("../Fonts/AVEZON.ttf");
 }
+
+.coin {
+    box-shadow: 0 0 20px #bdf502;
+}

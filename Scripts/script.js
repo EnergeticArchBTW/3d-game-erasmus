@@ -331,9 +331,9 @@ function CreateNewWorld() {
     pawn.x = 0;
     pawn.z = 0;
     coins = [
-    [450,40,-500,0,0,0,50,50,coin_texture, 50],
-    [-200,40,600,0,0,0,50,50,coin_texture, 50],
-    [-200,40,-200,0,0,0,50,50,coin_texture, 50],
+    [450,40,-500,0,0,0,50,50,coin_texture, 50, 20],
+    [-200,40,600,0,0,0,50,50,coin_texture, 50, 20],
+    [-200,40,-200,0,0,0,50,50,coin_texture, 50, 20],
     ]
 
     keys = [
@@ -356,6 +356,7 @@ function createSquares(squares, string) {
         "url(" + squares[i][8] + ")";
         newElement.style.opacity = squares[i][9];
         newElement.style.borderRadius = squares[i][9] + "%";
+        newElement.style.boxShadow = "0 0 " + squares[i][10] + "px" + squares[i][8];
         newElement.style.transform = 
         "translate3d(" + 
         (600 - squares[i][6]/2 + squares[i][0]) + 
