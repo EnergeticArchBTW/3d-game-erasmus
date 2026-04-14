@@ -6,6 +6,8 @@ let button2 = document.getElementById("button2");
 let button3 = document.getElementById("button3");
 let clickSound = new Audio;
 let points = 0;
+let c = 0;
+let k = 0;
 
 //create navigation
 //start game
@@ -50,7 +52,7 @@ button4.onclick = function() {
 
 button5.onclick = button4.onclick;
 
-function iteration(squares, string) {
+function iteration(squares, string, num) {
     for(let i = 0; i < squares.length; i++) {
         let r = (squares[i][0] - pawn.x)**2 +
         (squares[i][1] - pawn.y)**2 +
@@ -64,6 +66,8 @@ function iteration(squares, string) {
             squares[i][0] = 1000000;
             squares[i][1] = 1000000;
             squares[i][2] = 1000000;
+            num[0]++;
+            console.log("item: ",num,"coins: ", c[0], "keys: ",k[0]);
             document.getElementById(string + i).remove();
             points++;
         }
@@ -82,6 +86,6 @@ function iteration(squares, string) {
 
 function repeatForever() {
     update();
-    iteration(coins, "coin");
-    iteration(keys, "key");
+    iteration(coins, "coin",c);
+    iteration(keys, "key",k);
 }
