@@ -72,6 +72,14 @@ let coins = [];
 
 let keys = [];
 
+let finish = [
+    [900, -70, -900, 0, 0, 0, 320, 320, "Patterns/portal.gif"]
+];
+
+let start = [
+    [-900, 0, -900, 0, 0]
+];
+
 //variables for movement
 let PressLeft = 0;
 let PressRight = 0;
@@ -350,6 +358,10 @@ function CreateNewWorld() {
     [900, 40, 900,0,0,0,50,50,"Patterns/red_coin.svg", 50]
     ]
     createSquares(map, "map");
+}
+
+function clearWorld() {
+    world.innerHTML = "";
 }
 
 function createSquares(squares, string) {

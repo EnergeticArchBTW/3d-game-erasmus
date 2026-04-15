@@ -5,13 +5,20 @@ let button1 = document.getElementById("button1");
 let button2 = document.getElementById("button2");
 let button3 = document.getElementById("button3");
 let clickSound = new Audio;
+
 let points = 0;
-let c = 0;
-let k = 0;
+let c = [0];
+let k = [0];
+let score = 0;
 
 //create navigation
 //start game
 button1.onclick = function() {
+    pawn.x = start[0][0];
+    pawn.y = start[0][1];
+    pawn.z = start[0][2];
+    pawn.rx = start[0][3];
+    pawn.ry = start[0][4];
     clickSound.src = "Sounds/start-game.wav";
     clickSound.play();
     menu1.style.display = "none";
@@ -19,6 +26,7 @@ button1.onclick = function() {
     CreateNewWorld();
     createSquares(coins, "coin");
     createSquares(keys, "key");
+    createSquares(finish, "finish")
     TimerGame = setInterval(repeatForever,15);
     canlock = true;
 }
@@ -30,6 +38,7 @@ button2.onclick = function() {
     menu1.style.display = "none";
     menu2.style.display = "flex";
     menu3.style.display = "none";
+    canlock = false;
 }
 
 //rules
@@ -66,10 +75,10 @@ function iteration(squares, string, num) {
             squares[i][0] = 1000000;
             squares[i][1] = 1000000;
             squares[i][2] = 1000000;
-            num++;
+            num[0]++;
             console.log("item: ",num,"coins: ", c[0], "keys: ",k[0]);
             document.getElementById(string + i).remove();
-            points++;
+            points[0]++;
         }
         if(points >= 4) {
             alert("You collected all coins! Congratulations!");
@@ -84,8 +93,32 @@ function iteration(squares, string, num) {
     }
 }
 
+function finishIteration() {
+    let r = (finish[0][0] - pawn.x)**2 +
+            (finish[0][1] - pawn.y)**2 +
+            (finish[0][2] - pawn.z)**2;
+    let r1 = finish[0][6]**2;
+    if (r < r1) {
+        if (k[0] == 0) {
+            console.log("Please find the key");
+        }
+        else {
+            clearWorld();
+            clearInterval(TimerGame);
+            score = score + c[0];
+            c[0] = 0;
+            k[0] = 0;
+            //menu1.style.display = "block";
+            menu1.style.display = "flex";
+            document.exitPointerLock();
+            console.log("score is ", score);
+        }
+    }
+}
+
 function repeatForever() {
     update();
     iteration(coins, "coin",c);
     iteration(keys, "key",k);
+    finishIteration();
 }
