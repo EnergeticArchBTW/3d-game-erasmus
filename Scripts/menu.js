@@ -10,10 +10,19 @@ let points = 0;
 let c = [0];
 let k = [0];
 let score = 0;
+let level = 0;
 
 //create navigation
 //start game
 button1.onclick = function() {
+    //copy of arrays
+    map = makeCopy(mapArray[level]);
+    coins = makeCopy(coinsArray[level]);
+    keys = makeCopy(keysArray[level]);
+    finish = makeCopy(finishArray[level]);
+    start = makeCopy(startArray[level]);
+
+    // create world and put items on the map
     pawn.x = start[0][0];
     pawn.y = start[0][1];
     pawn.z = start[0][2];
@@ -60,6 +69,17 @@ button4.onclick = function() {
 }
 
 button5.onclick = button4.onclick;
+
+function makeCopy(array) {
+    let NewArray = new Array();
+    for(let i = 0; i < array.length; ++i) {
+        NewArray[i] = new Array();
+        for(let j = 0; j < array[i].length; ++j) {
+            NewArray[i][j] = array[i][j];
+        }
+    }
+    return NewArray;
+}
 
 function iteration(squares, string, num) {
     for(let i = 0; i < squares.length; i++) {
@@ -111,7 +131,14 @@ function finishIteration() {
             //menu1.style.display = "block";
             menu1.style.display = "flex";
             document.exitPointerLock();
+            canLock = false;
             console.log("score is ", score);
+            console.log("level is ", level);
+            ++level;
+            if (level == 2) {
+                level = 0;
+                score = 0;
+            }
         }
     }
 }
