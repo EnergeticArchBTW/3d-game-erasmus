@@ -1,9 +1,18 @@
 //variables for navigation
 let menu1 = document.getElementById("menu1");
 let menu2 = document.getElementById("menu2");
+let menu4 = document.getElementById("menu4");
+
 let button1 = document.getElementById("button1");
 let button2 = document.getElementById("button2");
 let button3 = document.getElementById("button3");
+let button6 = document.getElementById("button6");
+
+// variables for widgets
+let widget1 = document.getElementById("widget1");
+let widget2 = document.getElementById("widget2");
+let widget3 = document.getElementById("widget3");
+
 let clickSound = new Audio;
 
 let points = 0;
@@ -36,6 +45,14 @@ button1.onclick = function() {
     createSquares(coins, "coin");
     createSquares(keys, "key");
     createSquares(finish, "finish")
+
+    //lunch the game
+    widget1.style.display = "block";
+    widget2.style.display = "block";
+    widget1.innerHTML = "<p style='font-size: 50px'>Coins 0 of " + coins.length + "</p>";
+    widget2.innerHTML = "<p style='font-size: 50px'>Keys 0 of " + keys.length + "</p>";
+    widget3.innerHTML = "<p style='font-size: 35px'>Please find the key!</p>";
+
     TimerGame = setInterval(repeatForever,15);
     canlock = true;
 }
@@ -70,6 +87,12 @@ button4.onclick = function() {
 
 button5.onclick = button4.onclick;
 
+button6.onclick = function() {
+    clickSound.src = "Sounds/instructions.wav";
+    menu1.style.display = "flex";
+    menu4.style.display = "none";
+}
+
 function makeCopy(array) {
     let NewArray = new Array();
     for(let i = 0; i < array.length; ++i) {
@@ -96,7 +119,9 @@ function iteration(squares, string, num) {
             squares[i][1] = 1000000;
             squares[i][2] = 1000000;
             num[0]++;
-            console.log("item: ",num,"coins: ", c[0], "keys: ",k[0]);
+            //console.log("item: ",num,"coins: ", c[0], "keys: ",k[0]);
+            widget1.innerHTML = "<p style='font-size: 50px'>Coins " + c[0] + " of " + coins.length + "</p>";
+            widget2.innerHTML = "<p style='font-size: 50px'>Keys " + k[0] + " of " + keys.length + "</p>";
             document.getElementById(string + i).remove();
             points[0]++;
         }
@@ -120,7 +145,8 @@ function finishIteration() {
     let r1 = finish[0][6]**2;
     if (r < r1) {
         if (k[0] == 0) {
-            console.log("Please find the key");
+            widget3.style.display = "block";
+            setTimeout(() => widget3.style.display = "none", 5000);
         }
         else {
             clearWorld();
@@ -135,7 +161,14 @@ function finishIteration() {
             console.log("score is ", score);
             console.log("level is ", level);
             ++level;
+
+            menu1.style.display = "none";
+            menu4.style.display = "flex";
+            document.getElementById("result").innerHTML = "Your score is " + score + " points";
+            button1.innerHTML = "<p>Next level</p>";
+
             if (level == 2) {
+                button1.innerHTML = "<p>Start new game</p>";
                 level = 0;
                 score = 0;
             }
