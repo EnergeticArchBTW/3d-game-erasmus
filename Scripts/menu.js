@@ -113,6 +113,11 @@ function iteration(squares, string, num) {
         if(r < r1) {
             clickSound.src = "Sounds/collect_coin.mp3";
             clickSound.play();
+
+            widget3.innerHTML = "<p style='font-size: 35px'>You collected a coin !</p>"
+            widget3.style.display = "block";
+            setTimeout(() => widget3.style.display = "none", 5000);
+
             document.getElementById(string + i)
             .style.display = "none";
             squares[i][0] = 1000000;
@@ -145,6 +150,7 @@ function finishIteration() {
     let r1 = finish[0][6]**2;
     if (r < r1) {
         if (k[0] == 0) {
+            widget3.innerHTML = "<p style='font-size: 35px'>Please find the key first!</p>"
             widget3.style.display = "block";
             setTimeout(() => widget3.style.display = "none", 5000);
         }
