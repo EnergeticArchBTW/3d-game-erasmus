@@ -30,6 +30,24 @@ body {
     left: calc(50% - 600px);
 }
 
+#sky {
+    position: absolute;
+    /* Musi być większe niż świat, żeby przy obracaniu nie było widać rogów */
+    width: 5000px; 
+    height: 5000px;
+    
+    /* Przesuwamy go bardzo głęboko w tło */
+    transform: translate3d(-2500px, -2500px, -1000px); 
+    
+    background-image: url('../Patterns/sky.png');
+    background-repeat: repeat; /* Jeśli to mała tekstura */
+    background-size: 9000px;    /* Dopasuj wielkość kafelka nieba */
+    
+    /* Upewnij się, że nie blokuje kliknięć w grze */
+    pointer-events: none; 
+    z-index: -1;
+}
+
 .square {
     position: absolute;
 }

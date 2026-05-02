@@ -23,17 +23,17 @@ mapArray[0] = [
     //X,Y,Z, RX, RY, RZ, Width, Height, C
     [0, 0, -1000, 0, 0, 0, 2000, 200, wall], //front wall
     [0, 0, 1000, 0, 0, 0, 2000, 200, wall], //back wall
-    [1000, 0, 0, 0, 90, 0, 2000, 200, wall, 0.5], //right wall
-    [-1000, 0, 0, 0, -90, 0, 2000, 200, wall, 0.5], //left wall
+    [1000, 0, 0, 0, 90, 0, 2000, 200, wall, 1], //right wall
+    [-1000, 0, 0, 0, -90, 0, 2000, 200, wall, 1], //left wall
     [0, 100, 0, 90, 0, 0, 2000, 2000, "Patterns/dirt_top.jpeg"], //ground
 
     [0,0,-1000,0,0,0,83,180,"Patterns/door_resized.jpg"],
 
-    //cube
+    /*//cube
     [0, 0, -100, 0, 0, 0, 200, 200, "#0cea13ff"], //front wall
     [0, 0, 100, 0, 0, 0, 200, 200, "#0bcbdcff"], //back wall
     [100, 0, 0, 0, 90, 0, 200, 200, "#eb0804ff"], //right wall
-    [-100, 0, 0, 0, -90, 0, 200, 200, "#5e08e9ff"], //left wall
+    //[-100, 0, 0, 0, -90, 0, 200, 200, "#5e08e9ff"], //left wall
     [0, 100, 0, 90, 0, 0, 200, 200, "#ef0d7eff"], //ground
     [0, -100, 0, 90, 0, 0, 200, 200, "#f4e508ff"], //roof
 
@@ -56,6 +56,35 @@ mapArray[0] = [
     [-400, 0, 300, 0, -90, 0, 600, 200, "#5e08e9ff"], //left wall
     [250, 100, 500, 90, 0, 0, 200, 200, "#ef0d7eff"], //ground
     [-300, -100, 300, 90, 0, 90, 600, 200, "#f4e508ff"], //roof
+    */
+
+    //cube
+    [0, 0, -100, 0, 0, 0, 200, 200, "Patterns/brick_wall.jpg"], //front wall
+    [0, 0, 100, 0, 0, 0, 200, 200, "Patterns/brick_wall.jpg"], //back wall
+    [100, 0, 0, 0, 90, 0, 200, 200, "Patterns/brick_wall.jpg"], //right wall
+    //[-100, 0, 0, 0, -90, 0, 200, 200, "Patterns/brick_wall.jpg"], //left wall
+    [0, 100, 0, 90, 0, 0, 200, 200, "Patterns/brick_wall.jpg"], //ground
+    [0, -100, 0, 90, 0, 0, 200, 200, "Patterns/brick_wall.jpg"], //roof
+
+    //cube #2
+    [250, 0, 400, 0, 0, 0, 200, 200, "Patterns/brick_wall.jpg"], //front wall
+    [312.5, 0, 600, 0, 0, 0, 75, 200, "Patterns/brick_wall.jpg"], //back wall
+    [186.5, 0, 600, 0, 0, 0, 75, 200, "Patterns/brick_wall.jpg"], //back wall
+    [350, 0, 500, 0, 90, 0, 200, 200, "Patterns/brick_wall.jpg"], //right wall
+    [150, 0, 500, 0, -90, 0, 200, 200, "Patterns/brick_wall.jpg"], //left wall
+    [250, 100, 500, 90, 0, 0, 200, 200, "Patterns/brick_wall.jpg"], //ground
+    [250, 0, 500, -90, 200, 0, 200, 200, "Patterns/brick_wall.jpg"], //ground
+    [250, 0, 500, 90, 100, 0, 200, 200, "Patterns/brick_wall.jpg"], //ground
+    [250, -100, 500, 90, 0, 0, 200, 200, "Patterns/brick_wall.jpg"], //roof
+
+    //tunnel
+    [-300, 0, 0, 0, 0, 0, 200, 200, "Patterns/brick_wall.jpg"], //front wall
+    [-237.5, 0, 600, 0, 0, 0, 75, 200, "Patterns/brick_wall.jpg"], //back wall
+    [-363.5, 0, 600, 0, 0, 0, 75, 200, "Patterns/brick_wall.jpg"], //back wall
+    [-200, 0, 300, 0, 90, 0, 600, 200, "Patterns/brick_wall.jpg"], //right wall
+    [-400, 0, 300, 0, -90, 0, 600, 200, "Patterns/brick_wall.jpg"], //left wall
+    [250, 100, 500, 90, 0, 0, 200, 200, "Patterns/brick_wall.jpg"], //ground
+    [-300, -100, 300, 90, 0, 90, 600, 200, "Patterns/brick_wall.jpg"], //roof
 
     //walls for maze
     [350, 0, 0, 0, 0, 0, 500, 200, "Patterns/brick_wall.jpg"],
@@ -76,7 +105,7 @@ mapArray[0] = [
 coin_texture = "Patterns/coin.svg"
 
 finishArray[0] = [
-    [900, 100, -900, 90, 0, 0, 320, 320, "Patterns/portal.gif"]
+    [850, 100, -850, 90, 0, 0, 320, 320, "Patterns/portal.gif"]
 ];
 
 startArray[0] = [
@@ -309,13 +338,19 @@ function update() {
     dry = - MouseX/4;
     MouseY = MouseX = 0;
 
+    collision();
+
     //one tick for jump
     dy = jump(dy);
 
     //add movement to the coordinates
-    pawn.x = pawn.x + (4*dx + 16*PressSpeed*dx)*shiftMultiplier;
-    pawn.y = pawn.y + 4*dy;
-    pawn.z = pawn.z + (4*dz + 16*PressSpeed*dz)*shiftMultiplier;
+    pawn.x /*dx*/ = pawn.x + (4*dx + 14*PressSpeed*dx)*shiftMultiplier;
+    pawn.y /*dy*/ = pawn.y + 4*dy;
+    pawn.z /*dz*/ = pawn.z + (4*dz + 14*PressSpeed*dz)*shiftMultiplier;
+
+    /*pawn.x = dx;
+    pawn.y = dy;
+    pawn.z = dz;*/
 
     //if the mouse is locked
     if(lock) {
@@ -351,6 +386,151 @@ function update() {
     + (-pawn.z) + "px)";
 
     //requestAnimationFrame(update);
+}
+
+/*function collision() {
+    for(let i = 0; i < map.length; ++i) {
+        //count player coordinates in the rectangle coordinate system
+        let x0 = pawn.x - map[i][0];
+        let y0 = pawn.y - map[i][1];
+        let z0 = pawn.z - map[i][2];
+
+        let x1 = x0 + dx;
+        let y1 = y0 + dy;
+        let z1 = z0 + dz;
+
+        let point0 = coorTransform(x0,y0,z0,map[i][3],map[i][4],map[i][5]);
+        let point1 = coorTransform(x1,y1,z1,map[i][3],map[i][4],map[i][5]);
+
+        //condition of collision
+        if((Math.abs(point1[0]) < (map[i][6] + 90)/2) &&
+            (Math.abs(point1[1]) < (map[i][6] + 90)/2) &&
+            (Math.abs(point1[2]) < 50)) {
+                point1[2] = Math.sign(point0[2]) * 50;
+                let point2 = coorReTransform(point1[0], point1[1],point1[2],map[i][3],map[i][4],map[i][5]);
+                dx = point2[0] - x0;
+                dy = point2[0] - y0;
+                dz = point2[0] - z0;
+            }
+    }
+}*/
+
+function collision(){
+    for (let i = 0; i < map.length; i++){
+        
+        //count player coordinates in the rectagle coordinate system
+        let x0 = pawn.x - map[i][0];
+        let y0 = pawn.y - map[i][1];
+        let z0 = pawn.z - map[i][2];
+        
+        let x1 = x0 + dx;
+        let y1 = y0 + dy;
+        let z1 = z0 + dz;
+
+        if((x1**2 + y1**2 + z1**2) < (map[i][6]**2 + map[i][7]**2)) {
+        
+        let point0 = coorTransform(x0,y0,z0,map[i][3],map[i][4],map[i][5]);
+        let point1 = coorTransform(x1,y1,z1,map[i][3],map[i][4],map[i][5]);
+        
+        //condition of collision
+        if((Math.abs(point1[0]) < (map[i][6] + 90)/2) &&
+            (Math.abs(point1[1]) < (map[i][7] + 90)/2) &&
+            (Math.abs(point1[2]) < 50)){
+                point1[2] = Math.sign(point0[2]) * 50;
+                let point2 = coorReTransform(point1[0],point1[1],point1[2],map[i][3],map[i][4],map[i][5]);
+                dx = point2[0] - x0;
+                dy = point2[1] - y0;
+                dz = point2[2] - z0;
+            }
+        }
+    }
+}
+
+/**
+ * Resolves player collisions with map objects by calculating AABB penetration depths
+ * in the object's local coordinate system. Pushes the player out along the axis 
+ * of least penetration to prevent corner-teleportation bugs.
+ */
+/*function collision() {
+    for (let i = 0; i < map.length; i++) {
+        
+        // Obliczenie współrzędnych gracza względem środka ściany
+        let x0 = pawn.x - map[i][0];
+        let y0 = pawn.y - map[i][1];
+        let z0 = pawn.z - map[i][2];
+        
+        // Przewidywana pozycja w następnej klatce
+        let x1 = x0 + dx;
+        let y1 = y0 + dy;
+        let z1 = z0 + dz;
+
+        // Wstępne filtrowanie (zasięg sferyczny), sprawdza tylko bliskie obiekty
+        if ((x1**2 + y1**2 + z1**2) < (map[i][6]**2 + map[i][7]**2)) {
+            
+            // Transformacja do lokalnego układu współrzędnych ściany
+            let point0 = coorTransform(x0, y0, z0, map[i][3], map[i][4], map[i][5]);
+            let point1 = coorTransform(x1, y1, z1, map[i][3], map[i][4], map[i][5]);
+            
+            // Ustalenie lokalnych granic kolizji
+            let halfW = (map[i][6] + 90) / 2;
+            let halfH = (map[i][7] + 90) / 2;
+            let halfD = 50; // Grubość granicy (oś Z)
+            
+            // Warunek przecięcia (kolizji) w lokalnym AABB (Axis-Aligned Bounding Box)
+            if ((Math.abs(point1[0]) < halfW) &&
+                (Math.abs(point1[1]) < halfH) &&
+                (Math.abs(point1[2]) < halfD)) {
+                    
+                // Obliczanie głębokości penetracji dla każdej z osi lokalnych
+                let penX = halfW - Math.abs(point1[0]);
+                let penY = halfH - Math.abs(point1[1]);
+                let penZ = halfD - Math.abs(point1[2]);
+
+                // Wypychanie na zewnątrz na osi o najmniejszej głębokości penetracji
+                if (penX < penY && penX < penZ) {
+                    point1[0] = (Math.sign(point0[0]) || 1) * halfW;
+                } else if (penY < penX && penY < penZ) {
+                    point1[1] = (Math.sign(point0[1]) || 1) * halfH;
+                } else {
+                    point1[2] = (Math.sign(point0[2]) || 1) * halfD;
+                }
+
+                // Konwersja wypchniętego punktu z powrotem na układ globalny
+                let point2 = coorReTransform(point1[0], point1[1], point1[2], map[i][3], map[i][4], map[i][5]);
+                
+                // Modyfikacja oryginalnych wektorów ruchu
+                dx = point2[0] - x0;
+                dy = point2[1] - y0;
+                dz = point2[2] - z0;
+            }
+        }
+    }
+}*/
+
+function coorTransform(x0,y0,z0,rxc,ryc,rzc){
+	let x1 =  x0;
+	let y1 =  y0*Math.cos(rxc*deg) + z0*Math.sin(rxc*deg);
+	let z1 = -y0*Math.sin(rxc*deg) + z0*Math.cos(rxc*deg);
+	let x2 =  x1*Math.cos(ryc*deg) - z1*Math.sin(ryc*deg);
+	let y2 =  y1;
+	let z2 =  x1*Math.sin(ryc*deg) + z1*Math.cos(ryc*deg);
+	let x3 =  x2*Math.cos(rzc*deg) + y2*Math.sin(rzc*deg);
+ 	let y3 = -x2*Math.sin(rzc*deg) + y2*Math.cos(rzc*deg);
+	let z3 =  z2;
+	return [x3,y3,z3];
+}
+
+function coorReTransform (x3,y3,z3,rxc,ryc,rzc){
+	let x2 =  x3*Math.cos(rzc*deg) - y3*Math.sin(rzc*deg);
+	let y2 =  x3*Math.sin(rzc*deg) + y3*Math.cos(rzc*deg);
+	let z2 =  z3
+	let x1 =  x2*Math.cos(ryc*deg) + z2*Math.sin(ryc*deg);
+	let y1 =  y2;
+	let z1 = -x2*Math.sin(ryc*deg) + z2*Math.cos(ryc*deg);
+	let x0 =  x1;
+	let y0 =  y1*Math.cos(rxc*deg) - z1*Math.sin(rxc*deg);
+	let z0 =  y1*Math.sin(rxc*deg) + z1*Math.cos(rxc*deg);
+	return [x0,y0,z0];
 }
 
 function CreateNewWorld() {
